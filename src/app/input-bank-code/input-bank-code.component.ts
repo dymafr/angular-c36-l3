@@ -9,33 +9,32 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef( () => InputBankCodeComponent )
-    }
-  ]
+      useExisting: forwardRef(() => InputBankCodeComponent),
+    },
+  ],
 })
 export class InputBankCodeComponent implements OnInit, ControlValueAccessor {
-  public arr = (new Array(10)).fill(0).map( (t, i) => i);
+  public arr = new Array(10).fill(0).map((t, i) => i);
   public innerValue = '';
-  private onChange;
-  private onTouched;
+  private onChange: any;
+  private onTouched: any;
   public isDisabled = false;
 
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.arr = this.shuffle(this.arr);
   }
 
-  writeValue(value) {
+  writeValue(value: string) {
     this.innerValue = value;
   }
 
-  registerOnChange(fn) {
+  registerOnChange(fn: any) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn) {
+  registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
 
@@ -43,13 +42,12 @@ export class InputBankCodeComponent implements OnInit, ControlValueAccessor {
     this.isDisabled = disabled;
   }
 
-
-  private shuffle(arr) {
-    arr.sort( (el1, el2) => Math.random() - 0.5 );
+  private shuffle(arr: number[]) {
+    arr.sort((el1, el2) => Math.random() - 0.5);
     return arr;
   }
 
-  public update(i: string) {
+  public update(i: number) {
     this.innerValue += i;
     this.onChange(this.innerValue);
   }
@@ -58,5 +56,4 @@ export class InputBankCodeComponent implements OnInit, ControlValueAccessor {
     this.innerValue = '';
     this.onChange(this.innerValue);
   }
-
 }
